@@ -4,8 +4,8 @@ import MainMenu from './MainMenu';
 class Dashboard extends Component {
     render() {
         return (
-            <div className="App">
-                <MainMenu mainTitle="Vive Comodo" />
+            <div className="dashboardContainer">
+
             </div>
         );
     }
