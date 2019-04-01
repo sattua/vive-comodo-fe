@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,19 +12,29 @@ import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import SvgIcon from '@material-ui/core/SvgIcon';
 
 import MenuSection from '../../component/dashboard/MenuSection';
 import styles from './dashboardStyles'; // TODO refactor to move it out
 import Dashboard from '../dashboard/Container';
 import AuthContainer from '../auth/AuthContainer';
 
+function HomeIcon(props) {
+    return (
+        <SvgIcon {...props}>
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </SvgIcon>
+    );
+};
+
+const mapStateToProps = state => ({ });
+
+const mapDispatchToProps = dispatch => ({ });
 
 class MainMenu extends React.Component {
     state = {
@@ -76,11 +89,11 @@ class MainMenu extends React.Component {
 
         return (
             <div className={classes.root}>
-                <AppBar position="static">
-                    <Router>
+                <Router>
+                    <AppBar position="static" color="default">
                         <Toolbar>
                             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-                                <MenuIcon />
+                                <Link to="/"><HomeIcon className={classes.iconHover} color="error" style={{ fontSize: 30 }} /></Link>
                             </IconButton>
                             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                                 Vive Comodo
@@ -121,7 +134,7 @@ class MainMenu extends React.Component {
                                 </div>
                             }
                             {
-                                !isUserLoggedIn && <Link to="/auth/">LogIn</Link>
+                                !isUserLoggedIn && <Link to="/auth/">Sign In</Link>
                             }
                             <div className={classes.sectionMobile}>
                                 <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
@@ -129,12 +142,13 @@ class MainMenu extends React.Component {
                                 </IconButton>
                             </div>
                         </Toolbar>
-                        <Route path="/" exact component={Dashboard} />
-                        <Route path="/auth/" component={AuthContainer} />
-                    </Router>
-                </AppBar>
-                {renderMenu}
-                {renderMobileMenu}
+                    </AppBar>
+                    {renderMenu}
+                    {renderMobileMenu}
+                    <Route path="/" exact component={Dashboard} />
+                    <Route path="/auth/" component={AuthContainer} />
+
+                </Router>
             </div>
         );
     }
@@ -144,4 +158,4 @@ MainMenu.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MainMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MainMenu));

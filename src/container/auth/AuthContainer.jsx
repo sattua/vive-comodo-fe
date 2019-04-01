@@ -1,9 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
+import { updateCreateUserForm } from '../../actions/index';
+import { updateCreateUserObj } from '../../actions/index';
 
 const styles = theme => ({
     container: {
@@ -42,6 +57,14 @@ const currencies = [
     },
 ];
 
+const mapStateToProps = state => ({
+    formValues: state.signInForm,
+});
+
+const mapDispatchToProps = dispatch => ({
+    updateSignInForm: formObj => dispatch(updateCreateUserForm(formObj))
+});
+
 class AuthContainer extends React.Component {
     state = {
         name: 'Cat in the Hat',
@@ -55,211 +78,70 @@ class AuthContainer extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, formValues } = this.props;
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
                 <TextField
-                    id="standard-name"
+                    id="Name"
                     label="Name"
                     className={classes.textField}
-                    value={this.state.name}
+                    value={formValues.name}
                     onChange={this.handleChange('name')}
                     margin="normal"
                 />
 
                 <TextField
-                    id="standard-uncontrolled"
-                    label="Uncontrolled"
-                    defaultValue="foo"
-                    className={classes.textField}
-                    margin="normal"
-                />
-
-                <TextField
-                    required
-                    id="standard-required"
-                    label="Required"
-                    defaultValue="Hello World"
-                    className={classes.textField}
-                    margin="normal"
-                />
-
-                <TextField
-                    error
-                    id="standard-error"
-                    label="Error"
-                    defaultValue="Hello World"
-                    className={classes.textField}
-                    margin="normal"
-                />
-
-                <TextField
-                    disabled
-                    id="standard-disabled"
-                    label="Disabled"
-                    defaultValue="Hello World"
-                    className={classes.textField}
-                    margin="normal"
-                />
-
-                <TextField
-                    id="standard-password-input"
+                    id="filled-adornment-password"
+                    className={classNames(classes.margin, classes.textField)}
+                    variant="filled"
+                    type={this.state.showPassword ? 'text' : 'password'}
                     label="Password"
-                    className={classes.textField}
-                    type="password"
-                    autoComplete="current-password"
-                    margin="normal"
-                />
-
-                <TextField
-                    id="standard-read-only-input"
-                    label="Read Only"
-                    defaultValue="Hello World"
-                    className={classes.textField}
-                    margin="normal"
+                    value={this.state.password}
+                    onChange={this.handleChange('password')}
                     InputProps={{
-                        readOnly: true,
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="Toggle password visibility"
+                                    onClick={this.handleClickShowPassword}
+                                >
+                                    {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
                     }}
                 />
 
                 <TextField
-                    id="standard-dense"
-                    label="Dense"
-                    className={classNames(classes.textField, classes.dense)}
-                    margin="dense"
+                    id="outlined-email-input"
+                    label="Email"
+                    className={classes.textField}
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    margin="normal"
+                    variant="outlined"
+                    value={formValues.email}
                 />
 
-                <TextField
-                    id="standard-multiline-flexible"
-                    label="Multiline"
-                    multiline
-                    rowsMax="4"
-                    value={this.state.multiline}
-                    onChange={this.handleChange('multiline')}
-                    className={classes.textField}
-                    margin="normal"
-                />
+                <FormControl component="fieldset" className={classes.formControl}>
+                    <FormLabel component="legend">Gender</FormLabel>
+                    <RadioGroup
+                        aria-label="Gender"
+                        name="gender1"
+                        className={classes.group}
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                    >
+                        <FormControlLabel value="female" control={<Radio />} label="Female" />
+                        <FormControlLabel value="male" control={<Radio />} label="Male" />
+                    </RadioGroup>
+                </FormControl>
 
-                <TextField
-                    id="standard-multiline-static"
-                    label="Multiline"
-                    multiline
-                    rows="4"
-                    defaultValue="Default Value"
-                    className={classes.textField}
-                    margin="normal"
-                />
-
-                <TextField
-                    id="standard-helperText"
-                    label="Helper text"
-                    defaultValue="Default Value"
-                    className={classes.textField}
-                    helperText="Some important text"
-                    margin="normal"
-                />
-
-                <TextField
-                    id="standard-with-placeholder"
-                    label="With placeholder"
-                    placeholder="Placeholder"
-                    className={classes.textField}
-                    margin="normal"
-                />
-
-                <TextField
-                    id="standard-textarea"
-                    label="With placeholder multiline"
-                    placeholder="Placeholder"
-                    multiline
-                    className={classes.textField}
-                    margin="normal"
-                />
-
-                <TextField
-                    id="standard-number"
-                    label="Number"
-                    value={this.state.age}
-                    onChange={this.handleChange('age')}
-                    type="number"
-                    className={classes.textField}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    margin="normal"
-                />
-
-                <TextField
-                    id="standard-search"
-                    label="Search field"
-                    type="search"
-                    className={classes.textField}
-                    margin="normal"
-                />
-
-                <TextField
-                    id="standard-select-currency"
-                    select
-                    label="Select"
-                    className={classes.textField}
-                    value={this.state.currency}
-                    onChange={this.handleChange('currency')}
-                    SelectProps={{
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    helperText="Please select your currency"
-                    margin="normal"
-                >
-                    {currencies.map(option => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
-                </TextField>
-                <TextField
-                    id="standard-select-currency-native"
-                    select
-                    label="Native select"
-                    className={classes.textField}
-                    value={this.state.currency}
-                    onChange={this.handleChange('currency')}
-                    SelectProps={{
-                        native: true,
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    helperText="Please select your currency"
-                    margin="normal"
-                >
-                    {currencies.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </TextField>
-                <TextField
-                    id="standard-full-width"
-                    label="Label"
-                    style={{ margin: 8 }}
-                    placeholder="Placeholder"
-                    helperText="Full width!"
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                />
-
-                <TextField
-                    id="standard-bare"
-                    className={classes.textField}
-                    defaultValue="Bare"
-                    margin="normal"
-                />
+                <Button variant="contained" size="medium" color="primary" className={classes.margin}>
+                    Create User
+                </Button>
             </form>
         );
     }
@@ -269,4 +151,4 @@ AuthContainer.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AuthContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(AuthContainer));
