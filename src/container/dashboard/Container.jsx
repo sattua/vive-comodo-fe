@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import MainMenu from './MainMenu';
+
+import SearchComponent from '../../component/search/SearchComponent';
 
 class Dashboard extends Component {
     render() {
         return (
             <div className="dashboardContainer">
-
+                <SearchComponent/>
             </div>
         );
     }

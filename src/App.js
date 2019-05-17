@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import rootReducer from './reducer/appStore'
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux'
+
+import rootReducer from './reducer/index'
 
 import logo from './logo.svg'; // TODO
 import './App.css';
 
 import MainMenu from './container/dashboard/MainMenu';
-
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <div className="App">
-                    <MainMenu mainTitle={"Yess"} />
+                <div className="app">
+                    <MainMenu />
                 </div>
             </Provider>
         );

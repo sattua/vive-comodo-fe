@@ -1,0 +1,30 @@
+.search-component {
+    width: 70%;
+    margin: auto;
+    padding: 10px;
+}
+
+.search-component .search-field {
+    display: flex;
+    border: 1px solid #c3c3c3;
+    padding: 5px;
+    border-radius: 5px
+}
+
+.search-component .search-field .search-input-field{
+    margin-left: 10px;
+    width: 80%;
+}
+
+.search-component .search-field-icon {
+    margin-left: 20px;
+    cursor: pointer;
+    width: 20%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-component .search-field-icon svg {
+    margin-top: 5px;
+}

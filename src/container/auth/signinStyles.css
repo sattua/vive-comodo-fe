@@ -1,0 +1,20 @@
+.sign-in-form {
+    width: 60%;
+    margin: auto;
+    margin-top: 10px;
+}
+.sign-in-form .sign-in-form-col {
+    padding: 10px;
+    border-left: 1px solid #ccc;
+}
+
+.sign-in-form .col-right-padding {
+    padding-top: 50px;
+}
+.sign-in-form .sign-in-button {
+    margin-bottom: 10px;
+    float: right;
+}
+.errorMessage {
+    color: red;
+}

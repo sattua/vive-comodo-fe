@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux'
-import appStore from './appStore'
-import aStore from './anotherReducer'
+import { combineReducers } from 'redux';
+import authStore from './authStore';
+import popupBox from './popupBoxStore';
 
 export default combineReducers({
-    appStore,
-    aStore
+    authStore,
+    popupBox,
 })

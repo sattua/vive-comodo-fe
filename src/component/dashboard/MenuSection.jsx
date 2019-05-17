@@ -12,7 +12,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 class MenuSection extends Component {
     render() {
         return (
-            <div className="MenuSection">
+            <div className="menu-section">
                 <Menu
                     anchorEl={this.props.mobileMoreAnchorEl}
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}

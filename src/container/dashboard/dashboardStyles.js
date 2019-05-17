@@ -68,5 +68,8 @@ const styles = theme => ({
             display: 'none',
         },
     },
+    menuOption: {
+        marginLeft : 20,
+    }
 });
 export default styles;

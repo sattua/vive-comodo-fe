@@ -7,12 +7,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { withStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -98,18 +96,6 @@ class MainMenu extends React.Component {
                             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                                 Vive Comodo
                             </Typography>
-                            <div className={classes.search}>
-                                <div className={classes.searchIcon}>
-                                    <SearchIcon />
-                                </div>
-                                <InputBase
-                                    placeholder="Search…"
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                    }}
-                                />
-                            </div>
                             <div className={classes.grow} />
                             {
                                 isUserLoggedIn && <div className={classes.sectionDesktop}>
@@ -134,7 +120,10 @@ class MainMenu extends React.Component {
                                 </div>
                             }
                             {
-                                !isUserLoggedIn && <Link to="/auth/">Sign In</Link>
+                                !isUserLoggedIn && <div className={classes.menuOption}><Link to="/login/">Log In</Link></div>
+                            }
+                            {
+                                !isUserLoggedIn && <div className={classes.menuOption}><Link to="/auth/">Sign In</Link></div>
                             }
                             <div className={classes.sectionMobile}>
                                 <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
@@ -146,6 +135,7 @@ class MainMenu extends React.Component {
                     {renderMenu}
                     {renderMobileMenu}
                     <Route path="/" exact component={Dashboard} />
+                    <Route path="/login/" component={AuthContainer} />
                     <Route path="/auth/" component={AuthContainer} />
 
                 </Router>
