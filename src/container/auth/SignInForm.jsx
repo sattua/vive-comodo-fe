@@ -32,7 +32,13 @@ class SignInForm extends Component {
 
     handleCreateAction = () => {
         const { createGuestUser, formValues } = this.props;
-        createGuestUser(formValues);
+        createGuestUser({
+            email: "xxxx",
+            firstName: "xxx",
+            lastName: "xxx",
+            password: "123" ,
+
+        });
     };
 
     render() {

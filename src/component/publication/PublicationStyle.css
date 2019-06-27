@@ -1,0 +1,19 @@
+.publication-full {
+    max-width: 80%;
+    margin: auto;
+    margin-top: 10px;
+}
+.publication-full > div {
+    padding: 10px;
+}
+
+.publication-full-main-img {
+    max-width: 50%;
+    margin: auto;
+    margin-top: 5px;
+    height: 300px;
+}
+
+.publication-description-field {
+    width: 100%;
+}

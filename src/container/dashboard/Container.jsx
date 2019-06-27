@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import SearchComponent from '../../component/search/SearchComponent';
+import SearchContainer from '../../container/publication/SearchContainer';
 
 class Dashboard extends Component {
     render() {
         return (
             <div className="dashboardContainer">
-                <SearchComponent/>
+                <SearchContainer/>
             </div>
         );
     }

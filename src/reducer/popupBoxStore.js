@@ -10,7 +10,6 @@ const inicialState = {
 const popupBoxStore = (state = inicialState, action) => {
     switch (action.type) {
         case DISPLAY_POPUP_BOX:
-            debugger;
             return {
                 ...state,
                 popupBox: {

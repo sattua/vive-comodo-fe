@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     updateSignInForm: (fieldName, value) => dispatch(updateCreateUserForm(fieldName, value)),
-    createGuestUser: (formValues) => dispatch(createNewUser(formValues, "guest")),
+    createGuestUser: (user) => dispatch(createNewUser(user, "guest")),
 });
 
 class AuthContainer extends React.Component {

@@ -21,6 +21,7 @@ import MenuSection from '../../component/dashboard/MenuSection';
 import styles from './dashboardStyles'; // TODO refactor to move it out
 import Dashboard from '../dashboard/Container';
 import AuthContainer from '../auth/AuthContainer';
+import PublicationContainer from '../publication/PublicationContainer';
 
 function HomeIcon(props) {
     return (
@@ -125,6 +126,9 @@ class MainMenu extends React.Component {
                             {
                                 !isUserLoggedIn && <div className={classes.menuOption}><Link to="/auth/">Sign In</Link></div>
                             }
+                            {
+                                !isUserLoggedIn && <div className={classes.menuOption}><Link to="/publication/">Create Publication</Link></div>
+                            }
                             <div className={classes.sectionMobile}>
                                 <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
                                     <MoreIcon />
@@ -137,6 +141,7 @@ class MainMenu extends React.Component {
                     <Route path="/" exact component={Dashboard} />
                     <Route path="/login/" component={AuthContainer} />
                     <Route path="/auth/" component={AuthContainer} />
+                    <Route path="/publication/" component={PublicationContainer} />
 
                 </Router>
             </div>

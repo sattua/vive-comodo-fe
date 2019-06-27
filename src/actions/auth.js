@@ -2,7 +2,6 @@ import {
     CREATE_USER_FORM_UPDATES,
     CREATE_USER_FORM_SUCCESS,
     CREATE_USER_FORM_ERROR,
-    CREATE_GUEST_USER,
     CREATE_USER_FORM_IS_LOADING,
 } from '../util/constants';
 
@@ -12,8 +11,8 @@ import { SERVER_URL } from "./global";
 import { post } from '../request/index';
 
 const CREATE_GUEST_USER_URL = SERVER_URL + '/user/signin';
-const CREATE_OWNER_USER_URL = SERVER_URL + '/user/signin';
-const CREATE_ADMIN_USER_URL = SERVER_URL + '/user/signin';
+const CREATE_OWNER_USER_URL = SERVER_URL + '/user/owner';
+const CREATE_ADMIN_USER_URL = SERVER_URL + '/user/admin';
 
 export const updateCreateUserForm = fieldObj => ({
     type: CREATE_USER_FORM_UPDATES,
@@ -34,9 +33,9 @@ export const createUserFormIsLoading = () => ({
     payload: {},
 });
 
-export const createNewUser = (fieldObj, userType) => async (dispatch) => {
+export const createNewUser = (user, userType) => async (dispatch) => {
     dispatch(createUserFormIsLoading());
-    const createUserPromise = post(getCreateUserByType(userType), fieldObj);
+    const createUserPromise = post(getCreateUserByType(userType), user, {rol: 'guest'}, {});
     createUserPromise.then((response) => {
         if (response.status === 200) {
             dispatch(successCreateUserForm());
