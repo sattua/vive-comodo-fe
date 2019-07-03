@@ -1,9 +1,9 @@
-.publication-full {
+.publication-full-edit {
     max-width: 80%;
     margin: auto;
     margin-top: 10px;
 }
-.publication-full > div {
+.publication-full-edit > div {
     padding: 10px;
 }
 

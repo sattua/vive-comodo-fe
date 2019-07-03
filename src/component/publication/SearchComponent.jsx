@@ -14,7 +14,7 @@ class SearchComponent extends Component {
         let pubs = [];
         if (publications) {
             pubs = publications.map((p) => {
-                return <Publication id={p.id} title={p.title} images={[]} description={'TODO elipsis here...'} renderSize={'card'} />;
+                return <Publication id={p.id} title={p.title} images={[]} description={''} renderSize={'card'} />;
             });
         }
         return (

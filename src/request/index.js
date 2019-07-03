@@ -6,24 +6,23 @@ const HEADERS = {
     "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
 };
 
-export const post = (url, data, requestParams, headers) => {
-    debugger;
+export const post = (url, data, headers) => {
     return axios({
         method: 'post',
         url: url,
         data: data,
-        params: requestParams,
-        config: { headers: {...headers, ...HEADERS }},
-        headers: {...headers, ...HEADERS },
+        params: data,
+        config: { headers: {...HEADERS, ...headers }},
+        headers: {...HEADERS, ...headers },
     });
 };
 
-export const get = (url, requestParams) => {
+export const get = (url, requestParams, headers) => {
     return axios({
         method: 'get',
         url: url,
-        data: requestParams,
         params: requestParams,
-        headers: HEADERS,
+        config: { headers: {...HEADERS, ...headers }},
+        headers: {...HEADERS, ...headers },
     });
 };

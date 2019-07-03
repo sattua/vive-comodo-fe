@@ -2,6 +2,7 @@ import {
     GET_PUBLICATION_LIST_LOADING,
     GET_PUBLICATION_LIST_SUCCESS,
     GET_PUBLICATION_LIST_ERROR,
+    GET_PUBLICATION_SUCCESS,
     ERROR_CODES,
 } from '../util/constants';
 
@@ -31,6 +32,16 @@ const publicationStore = (state = inicialState, action) => {
                 publication: {
                     ...state.publication,
                     isLoading: true,
+                }
+            };
+        case GET_PUBLICATION_SUCCESS:
+            return {
+                ...state,
+                publication: {
+                    ...state.publication,
+                    currentCurrent: {
+                        ...action.payload,
+                    }
                 }
             };
         case GET_PUBLICATION_LIST_SUCCESS:

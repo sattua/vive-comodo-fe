@@ -6,7 +6,7 @@ class Dashboard extends Component {
     render() {
         return (
             <div className="dashboardContainer">
-                <SearchContainer/>
+                <SearchContainer />
             </div>
         );
     }
